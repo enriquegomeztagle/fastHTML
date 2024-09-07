@@ -47,3 +47,8 @@ You can deploy FastHTML apps on any Python-compatible platform, including **Rail
 For more advanced tutorials and use cases, explore:
 - [FastHTML By Example](https://docs.fastht.ml/tutorials/index.html)
 - [Custom Components](https://about.fastht.ml)
+
+
+## Autor
+- **Enrique Gómez Tagle** - [Perfil de GitHub](https://github.com/enriquegomeztagle)
+  
