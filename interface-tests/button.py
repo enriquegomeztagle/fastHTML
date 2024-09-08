@@ -1,25 +1,27 @@
 from fasthtml.common import *
 
-app , rt = fast_app()
-
+app, rt = fast_app(live=True)
 
 @rt('/')
 def get():
     return Div(
-        P('This is main message!'),
+        P('Página principal!', style="font-size: 20px; font-family: Arial; color: darkblue;"),
         Div(
-            # Button should get to nex route
-            Button('Show New Message', hx_get="/change"),
-    ))
-
-
-@rt('/change')
-def get():
-    return Div(
-        P('This is route /change'),
+            Button('Cambiar mensaje', hx_get='/mensaje2', hx_target='#contenedor-principal', hx_swap='outerHTML')
+        ),
+        style="background-color: lightblue; padding: 20px;",
+        id="contenedor-principal"
     )
 
-if __name__ == "__main__":
-    uvicorn.run("button:app", host='0.0.0.0', port=8000, reload=True)
+@rt('/mensaje2')
+def new_message():
+    return Div(
+        P('Mensaje 2 con otro estilo!', style="font-size: 22px; font-family: Verdana; color: darkgreen;"),
+        Div(
+            Button('Volver', hx_get='/', hx_target='#contenedor-principal', hx_swap='outerHTML')
+        ),
+        style="background-color: lightgreen; padding: 20px;",
+        id="contenedor-principal" 
+    )
 
 serve()
