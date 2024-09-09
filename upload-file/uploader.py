@@ -14,7 +14,7 @@ def get():
                 Button('Subir archivo', type="submit"),
                 method="POST",
                 enctype="multipart/form-data",
-                hx_post="/upload",
+                hx_post="/subir",
                 hx_target="#contenedor-principal",
                 hx_swap="outerHTML"
             ),
@@ -24,19 +24,17 @@ def get():
         id="contenedor-principal"
     )
 
-@rt('/upload', methods=['POST'])
-async def upload_file(request: Request):
+@rt('/subir', methods=['POST'])
+async def subir_archivo(solicitud: Request):
     try:
-        form = await request.form()  # Procesa el formulario que contiene el archivo
-        archivo = form.get('archivo')  # Obtén el archivo subido
+        form = await solicitud.form()
+        archivo = form.get('archivo')
 
         if archivo:
-            # Aquí imprimimos los atributos del archivo
             print("Nombre del archivo:", archivo.filename)
             print("Tipo MIME:", archivo.content_type)
             print("Tamaño del archivo:", archivo.__sizeof__())
 
-            # Muestra los atributos en la respuesta
             return Div(
                 P(f"Archivo subido con éxito: {archivo.filename}", style="font-size: 20px; color: black;"),
                 P(f"Tipo MIME: {archivo.content_type}", style="color: black;"),
